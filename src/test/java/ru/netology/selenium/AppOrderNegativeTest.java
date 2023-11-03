@@ -65,17 +65,32 @@ public class AppOrderNegativeTest {
 
     }
 
+
+
     @Test
     public void shouldBeFailedIncorrectPhoneInput() throws InterruptedException {
-        driver.findElement(By.xpath("//span[@data-test-id='name']//input")).sendKeys("Vasya");
-        driver.findElement(By.xpath("//span[@data-test-id='phone']//input")).sendKeys("Foo");
-        driver.findElement(By.xpath("//label[@data-test-id='agreement']")).click();
-        driver.findElement(By.xpath("//button[contains(@class, 'button')]")).click();
-        String text = driver.findElement(By.xpath("//span[@data-test-id='name'][contains(@class,'input_invalid')]//span[@class='input__sub']")).getText().trim();
+    //driver.findElement(By.xpath("//span[@data-test-id='name']//input")).sendKeys("Иванов Иван");
+    //driver.findElement(By.xpath("//span[@data-test-id='phone']//input")).sendKeys("Foo");
+    //driver.findElement(By.xpath("//label[@data-test-id='agreement']")).click();
+    //driver.findElement(By.xpath("//button[contains(@class, 'button')]")).click();
+    //String text = driver.findElement(By.cssSelector("[data-test-id=phone].input_invalid .input__sub")).getText().trim();
+    //String text = driver.findElement(By.xpath("//span[@data-test-id='phone'][contains(@class,'input_invalid')]//span[@class='input__sub']")).getText().trim();
+    //assertEquals("Телефон указан неверно. Должно быть 11 цифр, например, +79012345678.", text);
 
+
+
+        driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Петров Иван");
+        driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("Foo");
+        driver.findElement(By.cssSelector("[data-test-id=agreement]")).click();
+        driver.findElement(By.cssSelector("button.button")).click();
+
+        String text = driver.findElement(By.cssSelector("[data-test-id=phone].input_invalid .input__sub")).getText().trim();
         assertEquals("Телефон указан неверно. Должно быть 11 цифр, например, +79012345678.", text);
+
+
         Thread.sleep(8000);
     }
+
 
     @Test
     public void shouldBeFailedEmptyPhoneInput() throws InterruptedException {
